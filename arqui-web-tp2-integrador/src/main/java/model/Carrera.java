@@ -14,7 +14,7 @@ public class Carrera {
     @Column
     private String nombre_carrera;
     @OneToMany(mappedBy = "carrera")
-    List<Cursa> estudiantes;
+    List<Cursa> estudiantesMatriculados;
 
     public Carrera() {
         super();
@@ -24,15 +24,15 @@ public class Carrera {
         super();
         this.id_carrera = id_carrera;
         this.nombre_carrera = nombre_carrera;
-        this.estudiantes = new ArrayList<Cursa>();
+        this.estudiantesMatriculados = new ArrayList<Cursa>();
     }
 
-    public List<Cursa> getEstudiantes() {
-        return estudiantes;
+    public List<Cursa> getEstudiantesMatriculados() {
+        return estudiantesMatriculados;
     }
 
-    public void setEstudiantes(List<Cursa> estudiantes) {
-        this.estudiantes = estudiantes;
+    public void addEstudiantesMatriculados(Cursa estudianteMatriculado) {
+        this.estudiantesMatriculados.add(estudianteMatriculado);
     }
 
     public Long getId_carrera() {
@@ -49,5 +49,14 @@ public class Carrera {
 
     public void setNombre_carrera(String nombre_carrera) {
         this.nombre_carrera = nombre_carrera;
+    }
+
+    @Override
+    public String toString() {
+        return "Carrera{" +
+                "id_carrera=" + id_carrera +
+                ", nombre_carrera='" + nombre_carrera + '\'' +
+                ", estudiantes=" + estudiantesMatriculados +
+                '}';
     }
 }

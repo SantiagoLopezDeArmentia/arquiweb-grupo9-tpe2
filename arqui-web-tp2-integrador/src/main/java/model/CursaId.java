@@ -1,12 +1,16 @@
 package model;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 @Embeddable
 public class CursaId implements Serializable {
 
+    @Column
     private Long dniEstudiante;
+    @Column
     private Long idCarrera;
 
     public CursaId() {

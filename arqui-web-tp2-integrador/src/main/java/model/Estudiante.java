@@ -1,9 +1,6 @@
 package model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +22,8 @@ public class Estudiante implements Serializable {
     private String genero;
     @Column
     private String ciudad;
-    @OneToMany(mappedBy = "estudiante")
-    List<Cursa> carreras;
+    @OneToMany(mappedBy = "estudiante", fetch= FetchType.LAZY)
+    private List<Cursa> cursadas;
 
     public Estudiante() {
         super();
@@ -43,7 +40,7 @@ public class Estudiante implements Serializable {
         this.nro_libreta = nro_libreta;
         this.genero = genero;
         this.ciudad = ciudad;
-        this.carreras = new ArrayList<Cursa>();
+        this.cursadas = new ArrayList<Cursa>();
     }
 
     public Long getDni_estudiante() {
@@ -70,12 +67,12 @@ public class Estudiante implements Serializable {
         this.apellido = apellido;
     }
 
-    public List<Cursa> getCarreras() {
-        return carreras;
+    public List<Cursa> getCursadas() {
+        return cursadas;
     }
 
-    public void setCarreras(List<Cursa> carreras) {
-        this.carreras = carreras;
+    public void addCarrera(Cursa carrera) {
+        this.cursadas.add(carrera);
     }
 
     public int getEdad() {
@@ -108,5 +105,19 @@ public class Estudiante implements Serializable {
 
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
+    }
+
+    @Override
+    public String toString() {
+        return "Estudiante{" +
+                "dni_estudiante=" + dni_estudiante +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", edad=" + edad +
+                ", nro_libreta=" + nro_libreta +
+                ", genero='" + genero + '\'' +
+                ", ciudad='" + ciudad + '\'' +
+                ", cursadas=" + cursadas +
+                '}';
     }
 }
