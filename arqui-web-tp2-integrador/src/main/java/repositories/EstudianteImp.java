@@ -5,16 +5,24 @@ import model.Estudiante;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class EstudianteRepository implements Repository<Estudiante>{
+public class EstudianteImp implements Repository<Estudiante> {
 
     private EntityManager entityManager;
+    private static EstudianteImp instance;
 
-    public EstudianteRepository() {
+    private EstudianteImp() {
         super();
     }
 
-    public EstudianteRepository(EntityManager entityManager) {
+    private EstudianteImp(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    public static EstudianteImp getInstance(EntityManager entityManager) {
+        if (instance == null) {
+            instance = new EstudianteImp(entityManager);
+        }
+        return instance;
     }
 
     @Override

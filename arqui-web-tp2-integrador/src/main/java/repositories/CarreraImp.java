@@ -5,16 +5,24 @@ import model.Carrera;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class CarreraRepository implements Repository<Carrera>{
+public class CarreraImp implements Repository<Carrera>{
 
     private EntityManager entityManager;
+    private static CarreraImp instance;
 
-    public CarreraRepository(){
+    private CarreraImp(){
         super();
     }
 
-    public CarreraRepository(EntityManager em){
-        this.entityManager = em;
+    private CarreraImp(EntityManager entityManager){
+        this.entityManager = entityManager;
+    }
+
+    public static CarreraImp getInstance(EntityManager entityManager){
+        if(instance == null){
+            instance = new CarreraImp(entityManager);
+        }
+        return instance;
     }
 
     @Override
