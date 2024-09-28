@@ -6,29 +6,52 @@ import javax.persistence.*;
 public class Cursa {
     @EmbeddedId
     private CursaId id;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId ("dniEstudiante")
-    @JoinColumn(name = "dniEstudiante")
+    @JoinColumn(name = "dni_estudiante", nullable = false)
     private Estudiante estudiante;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId ("idCarrera")
-    @JoinColumn(name = "idCarrera")
+    @JoinColumn(name = "id_carrera", nullable = false)
     private Carrera carrera;
 
     @Column
     private int antiguedad;
-    @Column
-    private boolean es_graduado;
+
+    @Column(name = "es_graduado")
+    private boolean esGraduado;
 
     public Cursa() { super(); }
 
-    public Cursa(CursaId id, Estudiante estudiante, Carrera carrera, int antiguedad, boolean es_graduado) {
+    public Cursa(CursaId id, Estudiante estudiante, Carrera carrera, int antiguedad, boolean esGraduado) {
         super();
         this.id = id;
         this.estudiante = estudiante;
         this.carrera = carrera;
         this.antiguedad = antiguedad;
-        this.es_graduado = es_graduado;
+        this.esGraduado = esGraduado;
+    }
+
+    public CursaId getId() {
+        return id;
+    }
+
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
+
+    public Carrera getCarrera() {
+        return carrera;
+    }
+
+    public int getAntiguedad() {
+        return antiguedad;
+    }
+
+    public boolean isEsGraduado() {
+        return esGraduado;
     }
 
     @Override
@@ -38,7 +61,7 @@ public class Cursa {
                 //", estudiante=" + estudiante +
                 //", carrera=" + carrera +
                 ", antiguedad=" + antiguedad +
-                ", es_graduado=" + es_graduado +
+                ", es_graduado=" + esGraduado +
                 '}';
     }
 }

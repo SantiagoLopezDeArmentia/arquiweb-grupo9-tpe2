@@ -5,20 +5,20 @@ import model.Cursa;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class CursaImp implements Repository<Cursa>{
+public class CursaRepository implements Repository<Cursa> {
 
     private EntityManager entityManager;
-    private static CursaImp instance;
+    private static CursaRepository instance;
 
-    private CursaImp() { super(); }
+    private CursaRepository() { super(); }
 
-    private CursaImp(EntityManager entityManager) {
+    private CursaRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    public static CursaImp getInstance(EntityManager entityManager) {
+    public static CursaRepository getInstance(EntityManager entityManager) {
         if (instance == null) {
-            instance = new CursaImp(entityManager);
+            instance = new CursaRepository(entityManager);
         }
         return instance;
     }
@@ -51,6 +51,6 @@ public class CursaImp implements Repository<Cursa>{
 
     @Override
     public List<Cursa> findAll() {
-        return this.entityManager.createQuery("SELECT c FROM Cursa c").getResultList();
+        return this.entityManager.createQuery("SELECT c FROM Cursa c", Cursa.class).getResultList();
     }
 }

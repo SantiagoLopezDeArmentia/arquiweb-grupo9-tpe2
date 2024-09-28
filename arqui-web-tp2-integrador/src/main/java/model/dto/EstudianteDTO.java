@@ -1,45 +1,18 @@
-package model;
+package model.dto;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-@Entity
-public class Estudiante implements Serializable {
-    @Id
-    @Column(name = "dni_estudiante")
+public class EstudianteDTO {
     private Long dniEstudiante;
-
-    @Column
     private String nombre;
-
-    @Column
     private String apellido;
-
-    @Column
     private int edad;
-
-    @Column(name = "nro_libreta")
     private Long nroLibreta;
-
-    @Column
     private String genero;
-
-    @Column
     private String ciudad;
 
-    @OneToMany(mappedBy = "estudiante", fetch= FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Cursa> cursadas;
-
-    public Estudiante() {
-        super();
-    }
-
-    public Estudiante(Long dniEstudiante, String nombre,
-                      String apellido, int edad, Long nroLibreta,
-                      String genero, String ciudad) {
-        super();
+    public EstudianteDTO(Long dniEstudiante, String nombre, String apellido, int edad, Long nroLibreta, String genero, String ciudad) {
         this.dniEstudiante = dniEstudiante;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -47,7 +20,6 @@ public class Estudiante implements Serializable {
         this.nroLibreta = nroLibreta;
         this.genero = genero;
         this.ciudad = ciudad;
-        this.cursadas = new ArrayList<Cursa>();
     }
 
     public Long getDniEstudiante() {
@@ -72,14 +44,6 @@ public class Estudiante implements Serializable {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
-    }
-
-    public List<Cursa> getCursadas() {
-        return cursadas;
-    }
-
-    public void addCursada(Cursa cursada) {
-        this.cursadas.add(cursada);
     }
 
     public int getEdad() {
@@ -116,15 +80,13 @@ public class Estudiante implements Serializable {
 
     @Override
     public String toString() {
-        return "Estudiante{" +
-                "dni_estudiante=" + dniEstudiante +
+        return "dniEstudiante=" + dniEstudiante +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", edad=" + edad +
-                ", nro_libreta=" + nroLibreta +
+                ", nroLibreta=" + nroLibreta +
                 ", genero='" + genero + '\'' +
                 ", ciudad='" + ciudad + '\'' +
-                ", cursadas=" + cursadas +
                 '}';
     }
 }

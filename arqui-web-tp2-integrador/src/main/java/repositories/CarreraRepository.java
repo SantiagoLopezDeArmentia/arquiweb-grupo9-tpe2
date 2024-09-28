@@ -5,22 +5,22 @@ import model.Carrera;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class CarreraImp implements Repository<Carrera>{
+public class CarreraRepository implements Repository<Carrera> {
 
     private EntityManager entityManager;
-    private static CarreraImp instance;
+    private static CarreraRepository instance;
 
-    private CarreraImp(){
+    private CarreraRepository(){
         super();
     }
 
-    private CarreraImp(EntityManager entityManager){
+    private CarreraRepository(EntityManager entityManager){
         this.entityManager = entityManager;
     }
 
-    public static CarreraImp getInstance(EntityManager entityManager){
+    public static CarreraRepository getInstance(EntityManager entityManager){
         if(instance == null){
-            instance = new CarreraImp(entityManager);
+            instance = new CarreraRepository(entityManager);
         }
         return instance;
     }
@@ -53,8 +53,15 @@ public class CarreraImp implements Repository<Carrera>{
 
     @Override
     public List<Carrera> findAll() {
-        return this.entityManager.createQuery("SELECT c FROM Carrera c").getResultList();
+        return this.entityManager.createQuery("SELECT c FROM Carrera c", Carrera.class).getResultList();
     }
 
-
+    public List<Object> findAllByEstudiantesInscriptosOrderByCantidad() {
+        String jpql = "SELECT c, count(cs.id.dniEstudiante) AS totalInscriptos FROM Carrera c " +
+                "JOIN Cursa cs ON c.idCarrera = cs.id.idCarrera " +
+                "GROUP BY cs.id.idCarrera " +
+                "ORDER BY totalInscriptos DESC";
+        List<Object> list = entityManager.createQuery(jpql).getResultList();
+        return list;
+    }
 }

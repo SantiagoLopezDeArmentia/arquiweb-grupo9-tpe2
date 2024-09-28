@@ -8,9 +8,9 @@ import java.io.Serializable;
 @Embeddable
 public class CursaId implements Serializable {
 
-    @Column
+    @Column(name = "dni_estudiante")
     private Long dniEstudiante;
-    @Column
+    @Column(name = "id_carrera")
     private Long idCarrera;
 
     public CursaId() {

@@ -1,8 +1,8 @@
 package factories;
 
-import repositories.CarreraImp;
-import repositories.CursaImp;
-import repositories.EstudianteImp;
+import repositories.CarreraRepository;
+import repositories.CursaRepository;
+import repositories.EstudianteRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -28,16 +28,16 @@ public class MySqlFactory {
         return instance;
     }
 
-    public CursaImp getCursaImp(){
-        return CursaImp.getInstance(this.entityManager);
+    public CursaRepository getCursaRepository(){
+        return CursaRepository.getInstance(this.entityManager);
     }
 
-    public CarreraImp getCarreraImp() {
-        return CarreraImp.getInstance(this.entityManager);
+    public CarreraRepository getCarreraRepository() {
+        return CarreraRepository.getInstance(this.entityManager);
     }
 
-    public EstudianteImp getEstudianteImp() {
-        return EstudianteImp.getInstance(this.entityManager);
+    public EstudianteRepository getEstudianteRepository() {
+        return EstudianteRepository.getInstance(this.entityManager);
     }
 
 }
