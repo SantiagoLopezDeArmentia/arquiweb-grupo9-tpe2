@@ -1,6 +1,6 @@
 package model.dto.converter;
 
-import model.Estudiante;
+import model.Entities.Estudiante;
 import model.dto.EstudianteDTO;
 
 public class ConverterEstudianteDTO extends ConverterDTO<Estudiante, EstudianteDTO> {

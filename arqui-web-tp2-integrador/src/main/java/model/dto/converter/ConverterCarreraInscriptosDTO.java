@@ -1,6 +1,6 @@
 package model.dto.converter;
 
-import model.Carrera;
+import model.Entities.Carrera;
 import model.dto.CarreraInscriptosDTO;
 
 public class ConverterCarreraInscriptosDTO extends ConverterDTO<Carrera, CarreraInscriptosDTO> {

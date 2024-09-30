@@ -1,7 +1,8 @@
 package repositories;
 
-import model.Carrera;
+import model.Entities.Carrera;
 import model.dto.CarreraInscriptosDTO;
+import model.dto.ReporteDTO;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -69,6 +70,16 @@ public class CarreraRepository implements Repository<Carrera> {
                         "ORDER BY count(cs.id.dniEstudiante) DESC"
                 , CarreraInscriptosDTO.class).getResultList();
         return list;
+    }
+
+    public List<ReporteDTO> servicio3() {
+        String jpql = "SELECT new model.dto.ReporteDTO (" +
+                "c.nombreCarrera, cs.fechaInicio, count(cs.fechaInicio), count(cs.fechaFin)) " +
+                "FROM Carrera c " +
+                "JOIN Cursa cs ON cs.id.idCarrera = c.idCarrera " +
+                "GROUP BY c.nombreCarrera, cs.fechaInicio, cs.fechaFin " +
+                "ORDER BY c.nombreCarrera, cs.fechaInicio";
+        return this.entityManager.createQuery(jpql, ReporteDTO.class).getResultList();
 
     }
 }

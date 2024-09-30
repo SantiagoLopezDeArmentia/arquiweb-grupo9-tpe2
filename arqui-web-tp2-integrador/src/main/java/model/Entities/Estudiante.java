@@ -1,4 +1,4 @@
-package model;
+package model.Entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -124,7 +124,7 @@ public class Estudiante implements Serializable {
                 ", nro_libreta=" + nroLibreta +
                 ", genero='" + genero + '\'' +
                 ", ciudad='" + ciudad + '\'' +
-                ", cursadas=" + cursadas +
+                /*", cursadas=" + cursadas +*/
                 '}';
     }
 }

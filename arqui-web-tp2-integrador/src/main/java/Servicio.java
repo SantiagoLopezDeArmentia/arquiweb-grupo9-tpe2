@@ -1,17 +1,16 @@
 import factories.MySqlFactory;
-import model.Carrera;
-import model.Cursa;
-import model.CursaId;
-import model.Estudiante;
+import model.Entities.Carrera;
+import model.Entities.Cursa;
+import model.Entities.CursaId;
+import model.Entities.Estudiante;
 import model.dto.CarreraDTO;
 import model.dto.CarreraInscriptosDTO;
 import model.dto.EstudianteDTO;
+import model.dto.ReporteDTO;
 import model.dto.converter.ConverterCarreraDTO;
 import model.dto.converter.ConverterEstudianteDTO;
-import net.bytebuddy.build.Plugin;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.List;
 
 public class Servicio {
@@ -57,10 +56,13 @@ public class Servicio {
             mySqlFactory.getCarreraRepository().add(car2);
             mySqlFactory.getCarreraRepository().add(c);
 
+
+
             /*
              * B) Matricular un estudiante
              */
             System.out.println("\nServicio 2 - Inciso B)");
+
             CursaId cs1_id = new CursaId(e.getDniEstudiante(), c.getIdCarrera());
             Cursa cs1 = new Cursa(cs1_id, e, c, 2, sdf.parse("02/03/2022"));
             mySqlFactory.getCursaRepository().add(cs1);
@@ -127,6 +129,14 @@ public class Servicio {
             List<Estudiante> estudiantesG = mySqlFactory.getEstudianteRepository().findAllByCarreraFilterByCiudad("TUDAI", "Tandil");
             for (Estudiante estudiante : estudiantesG) {
                 System.out.println(converterEstudiante.fromEntity(estudiante));
+            }
+
+            /*
+             * Servicio 3 */
+            System.out.println("\nServicio 3");
+            List<ReporteDTO> reporteDTO = mySqlFactory.getCarreraRepository().servicio3();
+            for (ReporteDTO reporteDTO2 : reporteDTO) {
+                System.out.println(reporteDTO2);
             }
         } catch (Exception e) {
             e.printStackTrace();

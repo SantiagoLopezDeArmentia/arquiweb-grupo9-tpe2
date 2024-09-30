@@ -1,9 +1,8 @@
 package repositories;
 
-import model.Estudiante;
+import model.Entities.Estudiante;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class EstudianteRepository implements Repository<Estudiante> {

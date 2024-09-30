@@ -1,6 +1,6 @@
 package repositories;
 
-import model.Cursa;
+import model.Entities.Cursa;
 
 import javax.persistence.EntityManager;
 import java.util.List;
