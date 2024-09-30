@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Cursa {
@@ -20,18 +21,21 @@ public class Cursa {
     @Column
     private int antiguedad;
 
-    @Column(name = "es_graduado")
-    private boolean esGraduado;
+    @Column(name = "fecha_inicio")
+    private Date fechaInicio;
+
+    @Column (name = "fecha_fin")
+    private Date fechaFin;
 
     public Cursa() { super(); }
 
-    public Cursa(CursaId id, Estudiante estudiante, Carrera carrera, int antiguedad, boolean esGraduado) {
+    public Cursa(CursaId id, Estudiante estudiante, Carrera carrera, int antiguedad, Date fechaInicio) {
         super();
         this.id = id;
         this.estudiante = estudiante;
         this.carrera = carrera;
         this.antiguedad = antiguedad;
-        this.esGraduado = esGraduado;
+        this.fechaInicio = fechaInicio;
     }
 
     public CursaId getId() {
@@ -50,18 +54,19 @@ public class Cursa {
         return antiguedad;
     }
 
-    public boolean isEsGraduado() {
+    /*public boolean isEsGraduado() {
         return esGraduado;
-    }
+    }*/
 
     @Override
     public String toString() {
         return "Cursa{" +
                 "id=" + id +
-                //", estudiante=" + estudiante +
-                //", carrera=" + carrera +
+                ", estudiante=" + estudiante +
+                ", carrera=" + carrera +
                 ", antiguedad=" + antiguedad +
-                ", es_graduado=" + esGraduado +
+                ", fechaInicio=" + fechaInicio +
+                ", fechaFin=" + fechaFin +
                 '}';
     }
 }
