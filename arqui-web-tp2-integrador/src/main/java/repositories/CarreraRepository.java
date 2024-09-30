@@ -1,6 +1,7 @@
 package repositories;
 
 import model.Carrera;
+import model.dto.CarreraInscriptosDTO;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -56,12 +57,18 @@ public class CarreraRepository implements Repository<Carrera> {
         return this.entityManager.createQuery("SELECT c FROM Carrera c", Carrera.class).getResultList();
     }
 
-    public List<Object> findAllByEstudiantesInscriptosOrderByCantidad() {
-        String jpql = "SELECT c, count(cs.id.dniEstudiante) AS totalInscriptos FROM Carrera c " +
-                "JOIN Cursa cs ON c.idCarrera = cs.id.idCarrera " +
-                "GROUP BY cs.id.idCarrera " +
-                "ORDER BY totalInscriptos DESC";
-        List<Object> list = entityManager.createQuery(jpql).getResultList();
+    public List<CarreraInscriptosDTO> findAllByEstudiantesInscriptosOrderByCantidad() {
+        List<CarreraInscriptosDTO> list = entityManager.createQuery(
+                "SELECT new model.dto.CarreraInscriptosDTO(" +
+                        "c.nombreCarrera, " +
+                        "count(cs.id.dniEstudiante)" +
+                        ") " +
+                        "FROM Carrera c " +
+                        "JOIN Cursa cs ON c.idCarrera = cs.id.idCarrera " +
+                        "GROUP BY c.idCarrera "+
+                        "ORDER BY count(cs.id.dniEstudiante) DESC"
+                , CarreraInscriptosDTO.class).getResultList();
         return list;
+
     }
 }

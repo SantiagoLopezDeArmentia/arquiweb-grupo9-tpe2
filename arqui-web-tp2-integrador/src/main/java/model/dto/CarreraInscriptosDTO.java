@@ -5,12 +5,20 @@ import java.util.List;
 
 public class CarreraInscriptosDTO {
     private String nombre;
-    private int cantInscriptos;
+    private Long cantInscriptos;
     private List<EstudianteDTO> estudiantes;
 
-    public CarreraInscriptosDTO(String nombre, int cantInscriptos) {
+    public CarreraInscriptosDTO(String nombre, Number cantInscriptos) {
         this.nombre = nombre;
-        this.cantInscriptos = cantInscriptos;
+        this.cantInscriptos = cantInscriptos.longValue();
         this.estudiantes = new LinkedList<>();
+    }
+
+    @Override
+    public String toString() {
+        return "CarreraInscriptosDTO{" +
+                "nombre='" + nombre + '\'' +
+                ", cantInscriptos=" + cantInscriptos +
+                '}';
     }
 }
